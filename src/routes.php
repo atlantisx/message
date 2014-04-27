@@ -2,7 +2,7 @@
 
 //[i] Authorized Only
 Route::group(array('before'=>'auth.sentry'), function(){
-    Route::controller('message','MessageController');
+    Route::controller('message','Atlantis\Message\MessageController');
 });
 
 

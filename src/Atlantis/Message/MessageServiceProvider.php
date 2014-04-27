@@ -19,6 +19,10 @@ class MessageServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('atlantis/message');
+
+        include __DIR__ . '/../../routes.php';
+
+        $this->app['events']->fire('atlantis.message.ready');
 	}
 
 	/**
