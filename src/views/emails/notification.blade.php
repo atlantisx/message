@@ -11,7 +11,7 @@
             <a href="{{ $message_link }}">{{ trans('message::message.title.read_message') }}</a>
             </p>
             <br>
-            {{ trans('message::user.recovery_email_regards') }},
+            {{ trans('message::message.text.notification_regards') }},
 		</div>
 	</body>
 </html>

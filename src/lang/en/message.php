@@ -6,6 +6,7 @@
 
     'text' => array(
         'notification_subject' => 'Anda menerima pesanan dari :full_name',
-        'notification_body' => 'Anda telah menerima pesanan dari pengguna sistem ini, sila klik link di bawah untuk membacanya.'
+        'notification_body' => 'Anda telah menerima pesanan dari pengguna sistem ini, sila klik link di bawah untuk membacanya.',
+        'notification_regards'  => 'Thank You,<br> System Administrator'
     )
 );
