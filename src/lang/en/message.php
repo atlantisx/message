@@ -1,7 +1,9 @@
 <?php return array(
     'title' => array(
         'read_message'  => 'Baca Mesej',
-        'conversations' => 'Komunikasi'
+        'conversations' => 'Komunikasi',
+        'reply'         => 'Reply',
+        'hantar'        => 'Hantar'
     ),
 
     'text' => array(
