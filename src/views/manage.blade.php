@@ -5,7 +5,7 @@
         <div class="area-top clearfix">
             <div class="pull-left header">
                 <h3 class="title">
-                    <i class="icon-envelop"></i> Senarai Mesej
+                    <i class="icon-envelope"></i> Senarai Mesej
                 </h3>
                 <h5>
                     <span>

@@ -8,15 +8,15 @@
         </div>
         <div class="paper-section" style="padding:0;">
             <div class="info">
-                <span class="label label-info">#{{ $conversation->messages[0]->user->full_name }}</span>
-                @foreach($conversation->participantList as $participant)
-                <span class="label label-info">{{ $participant }}</span>
+                <span class="label label-info">#{{ $messages->first()->user->full_name }}</span>
+                @foreach($conversation->participant_list as $participant)
+                <span class="label label-info">#{{ $participant->first_name.' '.$participant->last_name }}</span>
                 @endforeach
             </div>
         </div>
         <div class="paper-section">
             <ul class="chat-box">
-            @foreach($conversation->messages as $message)
+            @foreach($messages as $message)
                 @include('message::partials.message.general')
             @endforeach
             </ul>

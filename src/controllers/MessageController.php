@@ -10,21 +10,15 @@ class MessageController extends \Atlantis\Admin\BaseController {
     }
 
 
-    public function getManage($conversation_id=null){
+    public function getManage(){
         #i: Get conversations for current user
-        $conversations = \Conversation::forUser($this->user->id)->get();
-
-        #i: Get current conversation id
-        if(empty($conversation_id)) $conversation_id = $conversations->first()->id;
-
-        #i: Get current messages
-        $messages = $conversations->find($conversation_id) ? $conversations->find($conversation_id)->messages : null;
+        $conversations = \Conversation::forUser($this->user->id)->withMessageMeta('{"permission":{"reply":"staff"}}')->get();
+        $broadcasts = \Conversation::forUser($this->superuser->id)->broadcast()->get();
 
         #i: View data
         $data = array(
             'conversations' => $conversations,
-            'messages' => $messages,
-            'conversation_id' => $conversation_id
+            'broadcasts' => $broadcasts
         );
 
         $this->layout->content = \View::make('message::manage',$data);
@@ -32,15 +26,19 @@ class MessageController extends \Atlantis\Admin\BaseController {
 
 
     public function getThread($conversation_id=null){
-        #i: Get conversations for current user
-        $conversations = \Conversation::forUser($this->user->id)->get();
+        #i: Get conversation
+        $conversation = \Conversation::find($conversation_id);
 
-        #i: Get current messages
-        $conversation = $conversations->find($conversation_id);
+        //if( $this->user_role == 'student' ){
+        //    $messages = $conversation->messages()->where('meta','{"permission":{"reply":"staff"}}')->get();
+        //}else{
+            $messages = $conversation->messages;
+        //}
 
         #i: View data
         $data = array(
             'conversation' => $conversation,
+            'messages' => $messages,
             'sender' => \User::find($this->user->id),
             'receiver' => \User::find($conversation->messages[0]->user_id)
         );

@@ -62,10 +62,16 @@ class Conversation extends Eloquent {
 		$user = $user ?: \Auth::user()->id;
 
 		return $query->join('participants', 'conversations.id', '=', 'participants.conversation_id')
-		->where('participants.user_id', $user)
-		->where('conversations.updated_at', '>', \DB::raw('participants.last_read'))
-		->select('conversations.*');
+            ->where('participants.user_id', $user)
+            ->where('conversations.updated_at', '>', \DB::raw('participants.last_read'))
+            ->select('conversations.*');
 	}
+
+    public function scopeWithMessageMeta($query,$meta){
+        $query->whereHas('messages', function($q) use($meta){
+            $q->where('meta',$meta);
+        });
+    }
 
 
     public function scopeWithMessage($query,$message_id){
@@ -78,8 +84,7 @@ class Conversation extends Eloquent {
     public function scopeBroadcast($query){
         $query->whereHas('messages',function($query){
             $query->where('meta','{"type":"broadcast"}');
-        })
-            ->orderBy('updated_at');
+        })->orderBy('updated_at');
     }
 
 

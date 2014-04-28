@@ -4,7 +4,7 @@
         <div class="info">
             <span class="name">
                 <strong>{{ $message->user->full_name }}</strong>
-                <span class="label label-green">{{ $message->user->roles[0]->name }}</span>
+                <span class="label label-green">{{ !empty($message->user->roles) ? $message->user->roles[0]->name : '' }}</span>
             </span>
             <span class="time" title="{{ $message->created_at->toDayDateTimeString() }}"><i class="icon-time"></i> {{ $message->created_when }}</span>
         </div>

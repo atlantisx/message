@@ -5,7 +5,7 @@
                 <div class="avatar" style="float:left; margin-top: 10px;"><img src="{{ Gravatar::src( $message->user->email ) }}" class="avatar-small"></div>
                 <span class="name" style="margin-left:40px; float:none;">
                     <strong>{{ $message->user->full_name }}</strong>
-                    <span class="label label-green">{{ $message->user->roles[0]->name }}</span>
+                    <span class="label label-green">{{ !empty($message->user->roles) ? $message->user->roles[0]->name : '' }}</span>
                 </span>
             </div>
         </div>
