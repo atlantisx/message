@@ -3,6 +3,7 @@
 //[i] Authorized Only
 Route::group(array('before'=>'auth.sentry'), function(){
     Route::get('message/{conversation_id?}',array('as'=>'message.manage', 'uses'=>'Atlantis\Message\MessageController@getManage'));
+    Route::get('message/thread/{conversation_id?}',array('as'=>'message.thread', 'uses'=>'Atlantis\Message\MessageController@getThread'));
     Route::get('message/show/{message_id?}',array('as'=>'message.show', 'uses'=>'Atlantis\Message\MessageController@getShow'));
     Route::controller('message','Atlantis\Message\MessageController');
 });

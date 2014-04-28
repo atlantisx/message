@@ -5,13 +5,10 @@
         <div class="area-top clearfix">
             <div class="pull-left header">
                 <h3 class="title">
-                    <i class="icon-tasks"></i> {{ trans('advance.title.application_list') }}
+                    <i class="icon-envelop"></i> Senarai Mesej
                 </h3>
                 <h5>
                     <span>
-                    @if( isset($details) )
-                        {{ trans('advance.text.application_total') }}
-                    @endif
                     </span>
                 </h5>
             </div>
@@ -22,11 +19,8 @@
                 @include('admin::partials.status')
             </div>
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-12">
                     @include('message::partials.conversations')
-                </div>
-                <div class="col-md-7">
-                    @include('message::partials.messages.header')
                 </div>
             </div>
         </div>

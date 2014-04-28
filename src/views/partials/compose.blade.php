@@ -29,8 +29,8 @@
         function composeController($scope, Rest){
             $scope.message = Rest.new(urlAPIDetailStatus,{
                 sender_id: '{{ $user->id }}',
-                receiver_id: '{{ $message->user->id }}',
-                subject: '{{ $message->conversation->subject }}'
+                receiver_id: '{{ $receiver->id }}',
+                subject: ''
             });
 
             $scope.sendMessage = function(){

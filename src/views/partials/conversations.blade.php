@@ -4,11 +4,7 @@
     </div>
     @if( isset($conversations) )
     @foreach( $conversations as $conversation )
-        @if( $conversation->id == $conversation_id )
-        <div class="arrow-box-right padded">
-        @else
-        <div class="box-section news">
-        @endif
+        <div class="box-section narrow news">
             <div class="avatar"><img src="{{ Gravatar::src( $user->email ) }}" class="avatar-small"></div>
             <div class="news-time">
                 <span>{{ $conversation->updated_at->format('d') }}</span> {{ $conversation->updated_at->format('M') }}

@@ -97,17 +97,17 @@ class Conversation extends Eloquent {
 
 	public function getParticipantListAttribute($user = null)
 	{
-		$user = $user ?: \Auth::user()->id;
+		$user = $user ?: \Sentry::getUser()->id;
 
-		$participantNames = \DB::table('users')
-		->join('participants', 'users.id', '=', 'participants.user_id')
-		->where('users.id', '!=', $user)
-		->where('participants.conversation_id', $this->id)
-		->select(\DB::raw("concat(users.first_name, ' ', users.last_name) as name"))
-		->lists('users.name');
+		$participants = \DB::table('users')
+            ->join('participants', 'users.id', '=', 'participants.user_id')
+            ->where('users.id', '!=', $user)
+            ->where('participants.conversation_id', $this->id)
+            ->get();
 
-		return $participantNames;
+		return $participants;
 	}
+
 
 	/**
 	 * addParticipants : Add users to this conversation
@@ -156,5 +156,14 @@ class Conversation extends Eloquent {
 			}
 		}
 	}
+
+    public function getCreatedWhenAttribute(){
+        return \Carbon\Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();
+    }
+
+
+    public function getUpdatedWhenAttribute(){
+        return \Carbon\Carbon::createFromTimeStamp(strtotime($this->updated_at))->diffForHumans();
+    }
 
 }
