@@ -10,7 +10,7 @@
                 <span>{{ $conversation->updated_at->format('d') }}</span> {{ $conversation->updated_at->format('M') }}
             </div>
             <div class="news-content">
-                <div class="news-title"><a href="{{ url('message/'.$conversation->id) }}" ng-click="messageRead({{$conversation->id}})">{{ $conversation->subject }}</a></div>
+                <div class="news-title"><a href="{{ url('message/thread/'.$conversation->id) }}" ng-click="messageRead({{$conversation->id}})">{{ $conversation->subject }}</a></div>
                 <div class="news-text">
                     <span class="label label-info">#{{ $conversation->messages()->first()->user->first_name }}</span>
                 </div>
