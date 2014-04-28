@@ -79,7 +79,7 @@ class MessageController extends \BaseController{
                         'sender' => \User::find($message_new->user_id)->toArray(),
                         'receiver' => \User::find($receiver->user_id)->toArray(),
                         'message' => $message_new,
-                        'message_link' =>  \URL::to('message/read', $message_new->id)
+                        'message_link' =>  \URL::to('message/show', $message_new->id)
                     );
 
                     #i: Data validations
