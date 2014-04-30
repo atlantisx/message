@@ -29,7 +29,7 @@ class MessageController extends \Atlantis\Admin\BaseController {
         #i: Get conversation
         $conversation = \Conversation::find($conversation_id);
 
-        //if( $this->user_role == 'student' ){
+        //if( $this->user_realm == 'student' ){
         //    $messages = $conversation->messages()->where('meta','{"permission":{"reply":"staff"}}')->get();
         //}else{
             $messages = $conversation->messages;

@@ -4,7 +4,7 @@
             <div class="avatar"><img class="avatar-small" src="{{ Gravatar::src($user->email) }}" /></div>
             <ul>
                 <li><b><a href="#">{{ $user->first_name }}</a></b></li>
-                <li class="note">{{ $user_role->description }}</li>
+                <li class="note">{{ $user_realm->description }}</li>
             </ul>
         </div>
         <div class="chat-message-box">
