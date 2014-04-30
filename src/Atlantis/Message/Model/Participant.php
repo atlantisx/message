@@ -26,7 +26,7 @@ class Participant extends Eloquent {
 	 */
 	public function conversation()
 	{
-		return $this->belongsTo('Andheiberg\Messenger\Models\Conversation');
+		return $this->belongsTo('Atlantis\Message\Model\Conversation');
 	}
 
 	/**

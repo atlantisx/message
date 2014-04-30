@@ -31,7 +31,7 @@ class Conversation extends Eloquent {
 	 */
 	public function messages()
 	{
-		return $this->hasMany('Andheiberg\Messenger\Models\Message');
+		return $this->hasMany('Atlantis\Message\Model\Message');
 	}
 
 
@@ -43,7 +43,7 @@ class Conversation extends Eloquent {
 	 */
 	public function participants()
 	{
-		return $this->hasMany('Andheiberg\Messenger\Models\Participant');
+		return $this->hasMany('Atlantis\Message\Model\Participant');
 	}
 
 

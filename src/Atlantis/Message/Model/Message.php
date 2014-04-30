@@ -45,7 +45,7 @@ class Message extends Eloquent {
 	 */
 	public function conversation()
 	{
-		return $this->belongsTo('Andheiberg\Messenger\Models\Conversation');
+		return $this->belongsTo('Atlantis\Message\Model\Conversation');
 	}
 
 
@@ -69,7 +69,7 @@ class Message extends Eloquent {
 	 */
 	public function participants()
 	{
-		return $this->hasMany('Andheiberg\Messenger\Models\Participant', 'conversation_id', 'conversation_id');
+		return $this->hasMany('Atlantis\Message\Model\Participant', 'conversation_id', 'conversation_id');
 	}
 
 
