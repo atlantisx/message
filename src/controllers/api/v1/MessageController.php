@@ -10,10 +10,11 @@ class MessageController extends \BaseController{
      * @params $user_id (GET) User ID
      ******************************************************************************************************************/
     public function index(){
+        #i: Get input
         $get = \Input::all();
 
-        $conversation = \Conversation::forUser($get['user_id'])->get();
-        $conversation->load('messages');
+        #i: Retrieve all message for user conversations
+        $conversation = \Conversation::with('messages')->forUser($get['user_id'])->get();
 
         return \Response::json($conversation);
     }
