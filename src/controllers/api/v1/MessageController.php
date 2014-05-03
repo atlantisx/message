@@ -1,8 +1,9 @@
 <?php namespace Atlantis\Message\Api\V1;
 
-use Atlantis\Admin;
+use Atlantis\Core\Controller\BaseController;
 
-class MessageController extends \BaseController{
+
+class MessageController extends BaseController{
 
     /*******************************************************************************************************************
      * Get All Conversation By User ID

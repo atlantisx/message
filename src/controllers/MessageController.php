@@ -1,9 +1,9 @@
 <?php namespace Atlantis\Message;
 
+use Atlantis\Core\Controller\BaseController;
 
-class MessageController extends \Atlantis\Admin\BaseController {
-    protected $layout = 'admin::layouts.common';
 
+class MessageController extends BaseController {
 
     public function getIndex(){
         $this->getManage();
