@@ -1,6 +1,9 @@
 <?php namespace Atlantis\Message\Api\V1;
 
 use Atlantis\Core\Controller\BaseController;
+use Atlantis\Message\Model\Conversation;
+use Atlantis\Message\Model\Participant;
+use Atlantis\Message\Model\Message;
 
 
 class MessageController extends BaseController{
@@ -30,8 +33,6 @@ class MessageController extends BaseController{
         $post = empty($post) ? \Input::all() : $post;
 
         try{
-            $conversation_id = (!empty($post['conversation_id']) ? $post['conversation_id'] : 0);
-
             #i: Message validation
             $validation = \Validator::make($post,array(
                 'sender_id' => 'required',
@@ -42,63 +43,28 @@ class MessageController extends BaseController{
             if( $validation->fails() ) throw new \Exception($validation->messages()->first());
 
             #i: Find conversation
-            $conversation = \Conversation::find($conversation_id);
+            $conversation_id = (!empty($post['conversation_id']) ? $post['conversation_id'] : -1);
+            $conversation = Conversation::find($conversation_id);
 
+            #i: If conversation not exist create
             if(!$conversation){
+                #i: Find receiver
+                $receiver = \User::find($post['receiver_id']);
+
                 #i: Create new conversation
-                $conversation = new \Conversation();
+                $conversation = new Conversation();
                 $conversation->subject = $post['subject'];
                 $conversation->save();
 
-                #i: Add participants/receivers
-                \Participant::create([
-                    'conversation_id' => $conversation->id,
-                    'user_id' => $post['receiver_id']
-                ]);
+                #i: Add receiver as participant
+                $conversation->addParticipantById($receiver->id);
             }
 
-            #i: Create and attach new message
-            $message_new = \Message::create([
-                'conversation_id' => $conversation->id,
-                'user_id' => $post['sender_id'],
-                'body' => $post['body']
-            ]);
+            #i: Find receiver user
+            $sender = \User::find($post['sender_id']);
 
-            #i: Check if status exist
-            if( isset($post['meta']) ){
-                $message_new->meta = $post['meta'];
-                $message_new->save();
-            }
-
-            #i: User notification through email
-            if( isset($post['notify']) ){
-                $receivers = $conversation->participants;
-                if( !$receivers ) throw new \Exception('Receivers not found!');
-
-                #i: Send notification to all receivers
-                foreach($receivers as $receiver){
-                    $data = array(
-                        'sender' => \User::find($message_new->user_id)->toArray(),
-                        'receiver' => \User::find($receiver->user_id)->toArray(),
-                        'message' => $message_new,
-                        'message_link' =>  \URL::to('message/show', $message_new->id)
-                    );
-
-                    #i: Data validations
-                    $validation = \Validator::make($data,array('receiver.email' => 'required|email'));
-                    if($validation->fails()) throw new \Exception($validation->messages()->first());
-
-                    #i: Check for view
-                    if( !\View::exists('message::emails.notification') ) throw new \Exception('View not exist!');
-
-                    #i: Queue a notification email
-                    \Mail::queue('message::emails.notification',$data,function($message) use($data){
-                        $message
-                            ->to($data['receiver']['email'])
-                            ->subject(trans('message::message.text.notification_subject',$data['sender']));
-                    });
-                }
-            }
+            #i: Send message to participants
+            $conversation->messageSend($sender, $post);
 
             $post['_status'] = array(
                 'type' => 'success',
