@@ -23,6 +23,7 @@ class Participant extends Eloquent {
 	 * Conversation relationship
 	 *
 	 * @var \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return Eloquent
 	 */
 	public function conversation()
 	{
@@ -33,24 +34,27 @@ class Participant extends Eloquent {
 	 * User relationship
 	 *
 	 * @var \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return Eloquent
 	 */
 	public function user()
 	{
-		return $this->belongsTo(Config::get('messenger::user_model'));
+		return $this->belongsTo('User');
 	}
+
 
 	public function scopeMe($query, $user = null)
 	{
 		$user = $user ?: \Auth::user()->id;
 
-		return $query->where('user_id', '=', $user);
+		$query->where('user_id', '=', $user);
 	}
+
 
 	public function scopeNotMe($query, $user = null)
 	{
 		$user = $user ?: \Auth::user()->id;
 
-		return $query->where('user_id', '!=', $user);
+		$query->where('user_id', '!=', $user);
 	}
 
 }
