@@ -90,9 +90,9 @@ class Conversation extends Eloquent {
 
     public function getSubjectAttribute($value){
         if( Uuid::isValid($value) ){
-            $detail = \App::make('Application\Detail');
-            if( $detail ){
-                return $detail::find($value)->application->config->detail_title;
+            $record = \App::make('Record');
+            if( $record ){
+                return $record::find($value)->detail->config->detail_title;
             }
         }
 
