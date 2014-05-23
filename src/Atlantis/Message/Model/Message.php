@@ -104,6 +104,10 @@ class Message extends Eloquent {
     }
 
     public function setMetaAttribute($value){
-        $this->attributes['meta'] = json_encode($value);
+        if( is_array($value) || is_object($value) ){
+            $this->attributes['meta'] = json_encode($value);
+        }else{
+            $this->attributes['meta'] = $value;
+        }
     }
 }
