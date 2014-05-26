@@ -68,13 +68,13 @@ class Conversation extends Eloquent {
 	}
 
 
-    public function scopeWithAllMessages($query, $user = null)
+    public function scopeWithAllMessages($query, $user_id = null)
     {
-        $user = $user ?: \Auth::user()->id;
+        $user_id = $user_id ?: \Sentry::getUser()->id;
 
-        return $query->join('participants', 'conversations.id', '=', 'participants.conversation_id')
-            ->where('participants.user_id', $user)
-            ->select('conversations.*');
+        $query->whereHas('messages', function($q) use($user_id){
+            $q->where('meta','{"permission":{"reply":"staff"}}');
+        });
     }
 
 
