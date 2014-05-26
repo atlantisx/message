@@ -13,31 +13,20 @@
         <div class="area-top clearfix">
             <div class="pull-left header">
                 <h3 class="title">
-                    <i class="icon-envelope"></i> Open Message
+                    <i class="fa fa-envelope-o"></i> Open Message
                 </h3>
-                <h5>
-                    <span></span>
-                </h5>
+                <h5><span>Received : {{ $message->created_at->toDayDateTimeString() }}</span></h5>
             </div>
         </div>
 
         <div class="container" ng-controller="messageControl">
-            <div class="row padded">
-                @include('admin::partials.status')
-            </div>
+            @include('core::partials.error')
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <ul class="chat-box timeline">
                     @include('message::partials.message.paper')
                     </ul>
                     @include('message::partials.compose')
-                </div>
-                <div class="col-md-4">
-                    <div class="box">
-                        <div class="box-header">
-                            <span class="title">{{ trans('message::message.title.conversations') }}</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
