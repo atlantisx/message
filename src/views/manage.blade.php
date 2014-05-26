@@ -8,7 +8,7 @@
                     <i class="fa fa-envelope"></i> Senarai Makluman
                 </h3>
                 <h5>
-                    <span>Last received : {{ $conversations->count() > 0 ? $conversations->last()->id : 'none' }}</span>
+                    <span>Last received : {{ $conversations->count() > 0 ? $conversations->last()->created_at->toDateTimeString() : 'none' }}</span>
                 </h5>
             </div>
         </div>
