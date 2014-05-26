@@ -67,6 +67,17 @@ class Conversation extends Eloquent {
             ->select('conversations.*');
 	}
 
+
+    public function scopeWithAllMessages($query, $user = null)
+    {
+        $user = $user ?: \Auth::user()->id;
+
+        return $query->join('participants', 'conversations.id', '=', 'participants.conversation_id')
+            ->where('participants.user_id', $user)
+            ->select('conversations.*');
+    }
+
+
     public function scopeWithMessageMeta($query,$meta){
         $query->whereHas('messages', function($q) use($meta){
             $q->where('meta',$meta);
