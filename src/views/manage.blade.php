@@ -1,4 +1,4 @@
-@extends('admin::layouts.user')
+@extends('themes/default::layouts.fluid')
 
 @section('base')
     <div class="main-content">
