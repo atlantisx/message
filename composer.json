@@ -1,6 +1,6 @@
 {
     "name": "atlantis/message",
-    "description": "Atlantis X PHP Message",
+    "description": "Atlantis Framework : Message",
     "keywords": ["atlantis", "laravel", "cms", "message", "messenger"],
     "authors": [
         {
@@ -11,7 +11,7 @@
     "license": "MIT",
     "require": {
         "php": ">=5.4",
-        "illuminate/support": "4.1.*"
+        "illuminate/support": "~4.2"
     },
     "autoload": {
         "classmap": [
