@@ -26,8 +26,8 @@
         var urlAPIMessage = appBase + 'api/v1/messages';
         var urlAPIDetailStatus = appBase + 'api/v1/details/status';
 
-        function composeController($scope, Rest){
-            $scope.message = Rest.new(urlAPIDetailStatus,{
+        function composeController($scope, Resource){
+            $scope.message = Resource.create(urlAPIDetailStatus,{
                 sender_id: '{{ $user->id }}',
                 receiver_id: '{{ $receiver->id }}',
                 subject: ''
