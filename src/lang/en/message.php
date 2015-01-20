@@ -1,14 +1,14 @@
 <?php return array(
     'title' => array(
-        'read_message'  => 'Baca Mesej',
-        'conversations' => 'Komunikasi',
+        'read_message'  => 'Read message',
+        'conversations' => 'Conversation',
         'reply'         => 'Reply',
-        'hantar'        => 'Hantar'
+        'hantar'        => 'Send'
     ),
 
     'text' => array(
-        'notification_subject' => 'Anda menerima pesanan dari :full_name',
-        'notification_body' => 'Anda telah menerima pesanan dari pengguna sistem ini, sila klik link di bawah untuk membacanya.',
+        'notification_subject'  => 'You have a notification from :full_name',
+        'notification_body'     => 'You have been received a notification from this user, please click a link below to read.',
         'notification_regards'  => 'Thank You,<br> System Administrator'
     )
 );
