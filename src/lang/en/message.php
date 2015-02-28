@@ -1,5 +1,12 @@
 <?php return array(
+    'manage'    => array(
+        'list'  => 'Messages'
+    ),
+
     'title' => array(
+        'broadcast'     => 'Broadcast',
+        'message'       => 'Message',
+        'notification'  => 'Notification',
         'read_message'  => 'Read message',
         'conversations' => 'Conversation',
         'reply'         => 'Reply',

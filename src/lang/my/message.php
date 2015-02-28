@@ -1,5 +1,12 @@
 <?php return array(
+    'manage'    => array(
+        'list'  => 'Senarai Message'
+    ),
+
     'title' => array(
+        'broadcast'     => 'Buletin',
+        'message'       => 'Mesej',
+        'notification'  => 'Makluman',
         'read_message'  => 'Baca Mesej',
         'conversations' => 'Komunikasi',
         'reply'         => 'Reply',
