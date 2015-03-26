@@ -24,7 +24,9 @@
             <div class="row">
                 <div class="col-md-8">
                     @include('message::partials.messages.paper')
-                    @include('message::partials.compose')
+                    @if( User::find($user->id)->can('message.send') )
+                        @include('message::partials.compose')
+                    @endif
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-profile">
