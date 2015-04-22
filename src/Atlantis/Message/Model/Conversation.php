@@ -23,6 +23,17 @@ class Conversation extends Eloquent {
 	protected $fillable = ['subject'];
 
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($conversation){
+            $conversation->messages()->delete();
+            $conversation->participants()->delete();
+        });
+    }
+
+
 	/**
 	 * Messages relationship
 	 *
@@ -101,9 +112,9 @@ class Conversation extends Eloquent {
 
     public function getSubjectAttribute($value){
         if( Uuid::isValid($value) ){
-            $record = \App::make('Record');
+            $record = \App::make('Record')->find($value);
             if( $record ){
-                return $record::find($value)->detail->config->detail_title;
+                return $record->detail->config->detail_title;
             }
         }
 
