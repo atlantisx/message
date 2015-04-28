@@ -30,7 +30,11 @@ class MessageController extends BaseController {
         $conversation = \Conversation::find($conversation_id);
 
         if( $this->user_realm == 'student' ){
-            $messages = $conversation->messages()->where('meta','{"permission":{"reply":"staff"}}')->get();
+            $messages = $conversation->messages()
+                ->where('meta','{"permission":{"reply":"staff"}}')
+                ->orWhere('meta','{"type":"broadcast"}')
+                ->get();
+
         }else{
             $messages = $conversation->messages;
         }
